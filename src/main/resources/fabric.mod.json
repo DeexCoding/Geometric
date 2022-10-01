@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "geometric",
   "version": "${version}",
-  "name": "Example Mod",
+  "name": "Geometric",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "Me!"
+    "Deex"
   ],
   "contact": {
     "homepage": "https://legacyfabric.net/",
     "sources": "https://github.com/Legacy-Fabric/fabric-example-mod"
   },
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/geometric/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "me.Deex.Geometric.GeometricMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "geometric.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.12.0",

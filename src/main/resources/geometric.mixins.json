@@ -1,14 +1,18 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.fabricmc.example.mixin",
+  "package": "me.Deex.Geometric.Mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
-    "ExampleMixin"
+    "BlockPosMixin",
+    "Vec3iMixin",
+    "WorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  
+  "refmap": "Geometric-refmap.json"
 }
