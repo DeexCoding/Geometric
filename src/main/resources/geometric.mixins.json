@@ -8,6 +8,7 @@
   "client": [
     "API.BlockPosMixin",
     "API.Vec3iMixin",
+    "MobNavigationMixin",
     "PaintingEntityMixin",
     "WorldMixin"
   ],

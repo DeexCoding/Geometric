@@ -15,6 +15,13 @@ public class BlockPosMixin extends Vec3i implements BlockPosExtension
     {
         super(x, y, z);
     }
+    
+    public void CopyPosition(BlockPos blockPos)
+    {
+        ((Vec3iExtension)(Object)this).setX(blockPos.getX());
+        ((Vec3iExtension)(Object)this).setY(blockPos.getY());
+        ((Vec3iExtension)(Object)this).setZ(blockPos.getZ());
+    }
 
     @Override
     public BlockPos UpThis()
@@ -68,6 +75,16 @@ public class BlockPosMixin extends Vec3i implements BlockPosExtension
         return (BlockPos)(Object)this;
     }
     
+    @Override
+    public BlockPos OffsetThis(Direction direction, int count) 
+    {
+        ((Vec3iExtension)(Object)(Vec3i)this).setX(getX() + (direction.getVector().getX() * count));
+        ((Vec3iExtension)(Object)(Vec3i)this).setY(getY() + (direction.getVector().getY() * count));
+        ((Vec3iExtension)(Object)(Vec3i)this).setZ(getZ() + (direction.getVector().getZ() * count));
+
+        return (BlockPos)(Object)this;
+    }
+    
     public BlockPos OffsetThisInOppositeDirection(Direction opposieTo)
     {
         ((Vec3iExtension)(Object)(Vec3i)this).setX(getX() - opposieTo.getVector().getX());
@@ -76,4 +93,5 @@ public class BlockPosMixin extends Vec3i implements BlockPosExtension
 
         return (BlockPos)(Object)this;
     }
+
 }

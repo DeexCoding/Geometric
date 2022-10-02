@@ -309,11 +309,15 @@ public abstract class WorldMixin
         int k = MathHelper.floor(end.z);
         blockHitResult = null;
         int o = 200;
-        while (o-- >= 0) {
-            if (Double.isNaN(start.x) || Double.isNaN(start.y) || Double.isNaN(start.z)) {
+        //while (o-- >= 0) //Original
+        while (--o >= -1) 
+        {
+            if (Double.isNaN(start.x) || Double.isNaN(start.y) || Double.isNaN(start.z)) 
+            {
                 return null;
             }
-            if (l == i && m == j && n == k) {
+            if (l == i && m == j && n == k) 
+            {
                 return bl3 ? blockHitResult : null;
             }
             boolean bl4 = true;

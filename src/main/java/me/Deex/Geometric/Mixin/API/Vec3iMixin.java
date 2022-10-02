@@ -26,6 +26,15 @@ public class Vec3iMixin implements Vec3iExtension
     @Mutable
     private int z;
 
+    
+    @Override
+    public void set(int x, int y, int z) 
+    {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
     @Override
     public void setX(int newX) 
     {
@@ -43,4 +52,5 @@ public class Vec3iMixin implements Vec3iExtension
     {
         z = newZ;
     }
+
 }
