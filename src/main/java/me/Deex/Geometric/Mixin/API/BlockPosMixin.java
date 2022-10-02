@@ -1,9 +1,9 @@
-package me.Deex.Geometric.Mixin;
+package me.Deex.Geometric.Mixin.API;
 
 import org.spongepowered.asm.mixin.Mixin;
 
-import me.Deex.Geometric.BlockPosExtension;
-import me.Deex.Geometric.Vec3iExtension;
+import me.Deex.Geometric.API.ClassExtensions.BlockPosExtension;
+import me.Deex.Geometric.API.ClassExtensions.Vec3iExtension;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;

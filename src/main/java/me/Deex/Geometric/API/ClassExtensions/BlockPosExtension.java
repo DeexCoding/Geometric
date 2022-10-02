@@ -1,4 +1,4 @@
-package me.Deex.Geometric;
+package me.Deex.Geometric.API.ClassExtensions;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

@@ -6,8 +6,9 @@
   "mixins": [
   ],
   "client": [
-    "BlockPosMixin",
-    "Vec3iMixin",
+    "API.BlockPosMixin",
+    "API.Vec3iMixin",
+    "PaintingEntityMixin",
     "WorldMixin"
   ],
   "injectors": {

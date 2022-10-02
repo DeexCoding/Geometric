@@ -1,4 +1,4 @@
-package me.Deex.Geometric;
+package me.Deex.Geometric.API.ClassExtensions;
 
 public interface Vec3iExtension 
 {

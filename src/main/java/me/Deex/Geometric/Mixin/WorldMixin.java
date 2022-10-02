@@ -5,8 +5,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import me.Deex.Geometric.BlockPosExtension;
-import me.Deex.Geometric.Vec3iExtension;
+import me.Deex.Geometric.API.ClassExtensions.BlockPosExtension;
+import me.Deex.Geometric.API.ClassExtensions.Vec3iExtension;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,8 +20,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.dimension.Dimension;
+import net.minecraft.world.level.LevelProperties;
 
 @Mixin(World.class)
 public abstract class WorldMixin 
@@ -398,29 +400,54 @@ public abstract class WorldMixin
     }
     
     @Overwrite
-    public void updateHorizontalAdjacent(BlockPos pos, Block block) //TODO: Make sure this function is correct
+    public void updateHorizontalAdjacent(BlockPos pos, Block block) 
     {
-        for (Direction direction : Direction.DirectionType.HORIZONTAL) 
+        BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
+
+        for (Direction direction : Direction.DirectionType.HORIZONTAL)
         {
-            ((BlockPosExtension)(Object)pos).OffsetThis(direction);
+            ((Vec3iExtension)(Object)blockPos).setX(pos.getX());
+            ((Vec3iExtension)(Object)blockPos).setY(pos.getY());
+            ((Vec3iExtension)(Object)blockPos).setZ(pos.getZ());
+            ((BlockPosExtension)(Object)blockPos).OffsetThis(direction);
 
-            if (!this.blockExists(pos)) continue;
+            if (!this.blockExists(blockPos)) continue;
 
-            BlockState blockState = this.getBlockState(pos);
+            BlockState blockState = this.getBlockState(blockPos);
 
             if (Blocks.UNPOWERED_COMPARATOR.isComparator(blockState.getBlock())) 
             {
-                blockState.getBlock().neighborUpdate((World)(Object)this, pos, blockState, block);
+                blockState.getBlock().neighborUpdate((World)(Object)this, blockPos, blockState, block);
                 continue;
             }
-            
-            if (!blockState.getBlock().isFullCube() || !Blocks.UNPOWERED_COMPARATOR.isComparator((blockState = this.getBlockState(((BlockPosExtension)(Object)pos).OffsetThis(direction))).getBlock())) continue;
-            blockState.getBlock().neighborUpdate((World)(Object)this, pos, blockState, block);
 
-            ((BlockPosExtension)(Object)pos).OffsetThisInOppositeDirection(direction);
+            if (!blockState.getBlock().isFullCube() || !Blocks.UNPOWERED_COMPARATOR.isComparator((blockState = this.getBlockState(((BlockPosExtension)(Object)blockPos).OffsetThis(direction))).getBlock())) continue;
+            blockState.getBlock().neighborUpdate((World)(Object)this, blockPos, blockState, block);
         }
     }
     
+    public BlockPos getSpawnPos() 
+    {
+        BlockPos blockPos = new BlockPos(this.levelProperties.getSpawnX(), this.levelProperties.getSpawnY(), this.levelProperties.getSpawnZ());
+        
+        if (!border.contains(blockPos)) 
+        {
+            blockPos = this.method_8559(new BlockPos(this.border.getCenterX(), 0.0, this.border.getCenterZ()));
+        }
+
+        return blockPos;
+    }
+
+    @Shadow
+    public abstract BlockPos method_8559(BlockPos pos);
+
+    @Shadow
+    @Final
+    private WorldBorder border;
+
+    @Shadow
+    protected LevelProperties levelProperties;
+
     @Shadow
     public abstract void neighbourUpdate(BlockPos pos, final Block block);
 
