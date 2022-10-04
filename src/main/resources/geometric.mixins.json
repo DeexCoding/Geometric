@@ -4,13 +4,15 @@
   "package": "me.Deex.Geometric.Mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-  ],
-  "client": [
     "API.BlockPosMixin",
     "API.Vec3iMixin",
+    "EndChunkGeneratorMixin",
+    "EntityMixin",
     "MobNavigationMixin",
     "PaintingEntityMixin",
     "WorldMixin"
+  ],
+  "client": [
   ],
   "injectors": {
     "defaultRequire": 1

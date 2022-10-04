@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import me.Deex.Geometric.API.ClassExtensions.BlockPosExtension;
 import me.Deex.Geometric.API.ClassExtensions.Vec3iExtension;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,7 +27,7 @@ import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.level.LevelProperties;
 
 @Mixin(World.class)
-public abstract class WorldMixin 
+public abstract class WorldMixin
 {
     @Overwrite
     public Block getBlockAt(BlockPos pos) 
